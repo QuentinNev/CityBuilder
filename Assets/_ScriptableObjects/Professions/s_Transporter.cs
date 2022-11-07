@@ -97,6 +97,7 @@ public class s_Transporter : s_Profession
                 case 1:
                     if (!pawn.performingAction)
                     {
+                        List<Job> toRemove = new List<Job>();
                         foreach (Job job in pawn.jobs)
                         {
                             if (!pawn.TryPickingUpItem((job as Haul).item, ((job as Haul).sourceBuilding as Stockpile)))
@@ -104,8 +105,13 @@ public class s_Transporter : s_Profession
                                 // Pawn can't carry this item, free the haul job
                                 job.assignedPawn = null;
                                 (job as Haul).stockpileB = null;
+                                toRemove.Add(job);
                             }
                         }
+
+                        foreach (Job j in toRemove)
+                            pawn.jobs.Remove(j);
+
                         pawn.jobStep++;
                     }
 
@@ -115,6 +121,9 @@ public class s_Transporter : s_Profession
                 // Going to stockpile
                 case 2:
                     haulJob = (pawn.jobs[0] as Haul);
+                    Debug.Log("Job : " + haulJob);
+                    Debug.Log("Destination : " + haulJob.stockpileB);
+                    Debug.Log("Entrance : " + haulJob.stockpileB.entrance);
                     if ((pawn.transform.position - haulJob.stockpileB.entrance.position).magnitude > haulJob.stockpileB.radius)
                     {
                         if (!pawn.HasPath())

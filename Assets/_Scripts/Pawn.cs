@@ -203,8 +203,6 @@ public class Pawn : Clickable
             return true;
         }
 
-        Debug.Log("My inventory is too full to pick up : " + item.data.name);
-
         return false;
     }
 

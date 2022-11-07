@@ -20,7 +20,14 @@ public class PawnManager : MonoBehaviour
     {
         foreach (Pawn pawn in pawns)
         {
-            pawn.UpdateBehavior();
+            try
+            {
+                pawn.UpdateBehavior();
+            }
+            catch (System.Exception e)
+            {
+                Debug.LogError(e);
+            }
         }
     }
 }

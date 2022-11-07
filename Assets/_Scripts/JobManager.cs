@@ -15,7 +15,7 @@ public class JobManager : MonoBehaviour
         jobHistory = new List<string>();
     }
 
-    public List<Job> jobs;
+    public static List<Job> jobs;
     public List<string> jobHistory;
 
     /// <summary>
@@ -67,7 +67,7 @@ public class JobManager : MonoBehaviour
     /// <returns>First available job</returns>
     public static T GetAvailableJob<T>() where T : Job
     {
-        foreach (Job job in singleton.jobs)
+        foreach (Job job in jobs)
         {
             if (!job.assignedPawn && job is T)
             {
@@ -86,7 +86,7 @@ public class JobManager : MonoBehaviour
     public static List<T> GetAvailableJobs<T>() where T : Job
     {
         List<T> foundJobs = new List<T>();
-        foreach (Job job in singleton.jobs)
+        foreach (Job job in jobs)
         {
             if (!job.assignedPawn && job is T)
             {
