@@ -10,6 +10,7 @@ using Sirenix.OdinInspector;
 /// </summary>
 public class Pawn : Clickable
 {
+
     #region S T A T S
 
     [TableList]
@@ -25,7 +26,7 @@ public class Pawn : Clickable
     public float baseHealth
     {
         get
-        {   
+        {
             // Do it in a cleanier way
             return 100 + (attributes[2].value * 10);
         }
@@ -47,7 +48,7 @@ public class Pawn : Clickable
     #endregion
 
     #region Leveling
-    public const int MAX_LEVEL = 10;
+    const int MAX_LEVEL = 10;
     public int level;
     public int experience;
     #endregion
@@ -94,7 +95,17 @@ public class Pawn : Clickable
     /// <param name="newProfession"></param>
     public void SetNewProfession(s_Profession newProfession)
     {
+        foreach (AttributeModifier mod in profession.modifiers)
+        {
+            attributes.Find(attr => attr.type == mod.type).RemoveModifier(mod);
+        }
+
         profession = newProfession;
+
+        foreach (AttributeModifier mod in profession.modifiers)
+        {
+            attributes.Find(attr => attr.type == mod.type).AddModifier(mod);
+        }
     }
 
     public void RefreshUI()
@@ -263,6 +274,8 @@ public class Pawn : Clickable
 
         if (!profession)
             profession = PawnManager.singleton.defaultProfession;
+
+        SetNewProfession(profession);
 
         currentHealth = baseHealth;
     }

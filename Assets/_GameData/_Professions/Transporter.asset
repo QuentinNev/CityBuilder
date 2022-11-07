@@ -12,8 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c5e98e860c4d34499e2e822358ea051, type: 3}
   m_Name: Transporter
   m_EditorClassIdentifier: 
-  bonusStrength: 1
-  bonusConstitution: 1
-  bonusAgility: 0
-  bonusIntelligence: 0
-  bonusCharisma: 0
+  modifiers:
+  - label: Transporter job
+    type: 0
+    value: 1
+  - label: Transporter job
+    type: 1
+    value: 1

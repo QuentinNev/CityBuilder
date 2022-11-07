@@ -12,8 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 618651ce3fcf69f4f9efa740ddeb2ff7, type: 3}
   m_Name: Cook
   m_EditorClassIdentifier: 
-  bonusStrength: 0
-  bonusConstitution: 0
-  bonusAgility: 1
-  bonusIntelligence: 1
-  bonusCharisma: 0
+  modifiers:
+  - label: Cook job
+    type: 2
+    value: 1
+  - label: Cook job
+    type: 3
+    value: 1

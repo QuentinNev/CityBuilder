@@ -12,8 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11259b210c2104247b15abb2b8afcb92, type: 3}
   m_Name: Harvester
   m_EditorClassIdentifier: 
-  bonusStrength: 0
-  bonusConstitution: 1
-  bonusAgility: 1
-  bonusIntelligence: 0
-  bonusCharisma: 0
+  modifiers:
+  - label: Harvester job
+    type: 2
+    value: 1
+  - label: Harvester job
+    type: 1
+    value: 1
