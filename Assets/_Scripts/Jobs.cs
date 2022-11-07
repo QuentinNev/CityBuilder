@@ -1,13 +1,5 @@
 using System.Collections.Generic;
 
-public abstract class Job
-{
-    public uint jobID;
-    public Pawn assignedPawn;
-    public Building sourceBuilding;
-    public int priority;
-}
-
 public class Haul : Job
 {
     public Item item;

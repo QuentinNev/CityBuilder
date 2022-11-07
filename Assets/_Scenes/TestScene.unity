@@ -987,6 +987,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_MoveRepeatDelay: 0.5
   m_MoveRepeatRate: 0.1
+  m_XRTrackingOrigin: {fileID: 0}
   m_ActionsAsset: {fileID: -944628639613478452, guid: ca9f5fa95ffab41fb9a615ab714db018,
     type: 3}
   m_PointAction: {fileID: 1054132383583890850, guid: ca9f5fa95ffab41fb9a615ab714db018,
@@ -1285,7 +1286,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44b1eaaf5a0e15f408d623cb0d992f40, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jobHistory: []
+  jobs: []
 --- !u!114 &1860446164
 MonoBehaviour:
   m_ObjectHideFlags: 0

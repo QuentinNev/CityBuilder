@@ -12,11 +12,10 @@ public class JobManager : MonoBehaviour
     {
         singleton = this;
         jobs = new List<Job>();
-        jobHistory = new List<string>();
     }
 
-    public static List<Job> jobs;
-    public List<string> jobHistory;
+    [Sirenix.Serialization.OdinSerialize]
+    public List<Job> jobs;
 
     /// <summary>
     /// Create a new job, gives it an id
@@ -24,9 +23,8 @@ public class JobManager : MonoBehaviour
     /// <param name="newJob"></param>
     public void AddJob(Job newJob)
     {
-        newJob.jobID = (uint)jobHistory.Count;
+        newJob.jobID = (uint)jobs.Count;
         jobs.Add(newJob);
-        jobHistory.Add((jobHistory.Count) + ". " + newJob.ToString());
     }
 
     /// <summary>
@@ -42,7 +40,6 @@ public class JobManager : MonoBehaviour
 
         jobs.Remove(jobToRemove);
         jobToRemove.sourceBuilding.pendingJobs.Remove(jobToRemove);
-        jobHistory[(int)jobToRemove.jobID] += " DONE";
     }
 
     /// <summary>
@@ -56,7 +53,6 @@ public class JobManager : MonoBehaviour
             job.assignedPawn?.jobs.Remove(job);
             jobs.Remove(job);
             job.sourceBuilding.pendingJobs.Remove(job);
-            jobHistory[(int)job.jobID] += " DONE";
         }
     }
 
@@ -67,7 +63,7 @@ public class JobManager : MonoBehaviour
     /// <returns>First available job</returns>
     public static T GetAvailableJob<T>() where T : Job
     {
-        foreach (Job job in jobs)
+        foreach (Job job in singleton.jobs)
         {
             if (!job.assignedPawn && job is T)
             {
@@ -86,7 +82,7 @@ public class JobManager : MonoBehaviour
     public static List<T> GetAvailableJobs<T>() where T : Job
     {
         List<T> foundJobs = new List<T>();
-        foreach (Job job in jobs)
+        foreach (Job job in singleton.jobs)
         {
             if (!job.assignedPawn && job is T)
             {

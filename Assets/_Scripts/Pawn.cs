@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using System;
+using Sirenix.OdinInspector;
 
 /// <summary>
 /// This class represent a pawn by it's animator, stats and navMeshAgent
@@ -10,6 +11,15 @@ using System;
 public class Pawn : Clickable
 {
     #region S T A T S
+
+    [TableList]
+    public List<Attribute> attributes = new List<Attribute>() {
+        new Attribute(AttributeType.Strength, 0),
+        new Attribute(AttributeType.Constitution, 0),
+        new Attribute(AttributeType.Agility, 0),
+        new Attribute(AttributeType.Intelligence, 0),
+        new Attribute(AttributeType.Charisma, 0)
+    };
 
     // H E A L T H
     public float baseHealth
