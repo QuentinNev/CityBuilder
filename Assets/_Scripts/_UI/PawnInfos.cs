@@ -33,7 +33,7 @@ public class PawnInfos : MonoBehaviour
     {
         watchedPawn = pawn;
         Subscribe(watchedPawn);
-        SetInfos(pawn.strength, pawn.constitution, pawn.agility, pawn.intelligence, pawn.charisma);
+        SetInfos(pawn.attributes[0].value, pawn.attributes[1].value, pawn.attributes[2].value, pawn.attributes[3].value, pawn.attributes[4].value);
         pawn.RefreshUI();
     }
 

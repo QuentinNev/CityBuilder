@@ -25,8 +25,9 @@ public class Pawn : Clickable
     public float baseHealth
     {
         get
-        {
-            return 100 + (constitution * 10);
+        {   
+            // Do it in a cleanier way
+            return 100 + (attributes[2].value * 10);
         }
     }
     float currentHealth = 100;
@@ -43,56 +44,6 @@ public class Pawn : Clickable
             OnHealthUpdated(EventArgs.Empty, currentHealth);
         }
     }
-
-    // S T R
-    public int strength
-    {
-        get
-        {
-            return baseStrength + profession.bonusStrength;
-        }
-    }
-    public int baseStrength;
-
-    // C O N
-    public int constitution
-    {
-        get
-        {
-            return baseConstitution + profession.bonusConstitution;
-        }
-    }
-    public int baseConstitution;
-
-    // A G I
-    public int agility
-    {
-        get
-        {
-            return baseAgility + profession.bonusAgility;
-        }
-    }
-    public int baseAgility;
-
-    // I N T
-    public int intelligence
-    {
-        get
-        {
-            return baseIntelligence + profession.bonusIntelligence;
-        }
-    }
-    public int baseIntelligence;
-
-    // C H A
-    public int charisma
-    {
-        get
-        {
-            return baseCharisma + profession.bonusCharisma;
-        }
-    }
-    public int baseCharisma;
     #endregion
 
     #region Leveling
@@ -168,7 +119,7 @@ public class Pawn : Clickable
     {
         get
         {
-            return 10 + (strength * 2);
+            return 10 + (attributes[0].value * 2);
         }
     }
 
