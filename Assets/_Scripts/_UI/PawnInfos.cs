@@ -25,7 +25,7 @@ public class PawnInfos : MonoBehaviour
     #endregion
 
     [SerializeField]
-    TextMeshProUGUI status;  
+    TextMeshProUGUI status;
     [SerializeField]
     ItemList itemList;
 
@@ -33,7 +33,13 @@ public class PawnInfos : MonoBehaviour
     {
         watchedPawn = pawn;
         Subscribe(watchedPawn);
-        SetInfos(pawn.attributes[0].value, pawn.attributes[1].value, pawn.attributes[2].value, pawn.attributes[3].value, pawn.attributes[4].value);
+        SetInfos(
+            pawn.attributes.GetStat(AttributeType.Strength).value,
+            pawn.attributes.GetStat(AttributeType.Constitution).value,
+            pawn.attributes.GetStat(AttributeType.Agility).value,
+            pawn.attributes.GetStat(AttributeType.Intelligence).value,
+            pawn.attributes.GetStat(AttributeType.Charisma).value
+        );
         pawn.RefreshUI();
     }
 
@@ -68,7 +74,7 @@ public class PawnInfos : MonoBehaviour
     public void UpdateHealthBar(object sender, System.EventArgs e)
     {
         healthBar.UpdatebBar((sender as Pawn).CurrentHealth, (sender as Pawn).baseHealth);
-    }    
+    }
 
     public void UpdateItemList(object sender, System.EventArgs e)
     {

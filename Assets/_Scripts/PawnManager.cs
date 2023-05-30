@@ -6,6 +6,7 @@ public class PawnManager : MonoBehaviour
 {
     public static PawnManager singleton;
     public s_Profession defaultProfession;
+    public s_AttributesProfile defaultAttributes;
 
     private void Awake()
     {
@@ -29,5 +30,17 @@ public class PawnManager : MonoBehaviour
                 Debug.LogError(e);
             }
         }
+    }
+
+    public s_AttributesProfile GetRandomAttributes()
+    {
+        s_AttributesProfile profile = Instantiate(defaultAttributes);
+
+        foreach (s_Attribute attr in profile.attributes)
+        {
+            attr.defaultValue = (short)Random.Range(0, 5);
+        }
+
+        return profile;
     }
 }

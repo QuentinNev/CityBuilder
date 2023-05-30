@@ -12,23 +12,15 @@ public class Pawn : Clickable
 {
 
     #region S T A T S
-
     [TableList]
-    public List<Attribute> attributes = new List<Attribute>() {
-        new Attribute(AttributeType.Strength, 0),
-        new Attribute(AttributeType.Constitution, 0),
-        new Attribute(AttributeType.Agility, 0),
-        new Attribute(AttributeType.Intelligence, 0),
-        new Attribute(AttributeType.Charisma, 0)
-    };
+    public AttributeCollection attributes;
 
     // H E A L T H
     public float baseHealth
     {
         get
         {
-            // Do it in a cleanier way
-            return 100 + (attributes[2].value * 10);
+            return 100 + (attributes.GetStat(AttributeType.Constitution).baseValue * 10);
         }
     }
     float currentHealth = 100;
@@ -94,18 +86,22 @@ public class Pawn : Clickable
     /// </summary>
     /// <param name="newProfession"></param>
     public void SetNewProfession(s_Profession newProfession)
-    {
+    {   
+        /*
         foreach (AttributeModifier mod in profession.modifiers)
         {
-            attributes.Find(attr => attr.type == mod.type).RemoveModifier(mod);
+
         }
+        */
 
         profession = newProfession;
 
+        /*
         foreach (AttributeModifier mod in profession.modifiers)
         {
-            attributes.Find(attr => attr.type == mod.type).AddModifier(mod);
+
         }
+        */
     }
 
     public void RefreshUI()
@@ -130,7 +126,7 @@ public class Pawn : Clickable
     {
         get
         {
-            return 10 + (attributes[0].value * 2);
+            return 10 + (attributes.GetStat(AttributeType.Strength).baseValue * 2);
         }
     }
 
@@ -276,6 +272,8 @@ public class Pawn : Clickable
             profession = PawnManager.singleton.defaultProfession;
 
         SetNewProfession(profession);
+
+        attributes = new AttributeCollection(PawnManager.singleton.GetRandomAttributes());
 
         currentHealth = baseHealth;
     }
