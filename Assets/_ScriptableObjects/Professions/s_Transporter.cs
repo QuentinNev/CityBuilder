@@ -34,7 +34,7 @@ public class s_Transporter : s_Profession
                         else
                             haulJob.stockpileB = StockpileManager.singleton.GetClosestStockpile(haulJob.sourceBuilding.entrance.position, (haulJob.sourceBuilding as Stockpile));
 
-
+                        Debug.Log($"Moving {haulJob.item} from {haulJob.sourceBuilding} to {haulJob.stockpileB}");
                         List<Haul> haulJobs = JobManager.GetAvailableJobs<Haul>();
                         foreach (Haul similarHaulJob in haulJobs)
                         {
@@ -43,17 +43,17 @@ public class s_Transporter : s_Profession
                             {
                                 if (haulJob.sourceBuilding == similarHaulJob.sourceBuilding)
                                 {
-                                    productionBuilding = GetAcceptableProductionBuilding(haulJob);
+                                    Stockpile stockpile = GetAcceptableProductionBuilding(haulJob);
 
                                     // TODO : Avoid code duplicate for this if else
                                     if (!productionBuilding)
-                                        haulJob.stockpileB = StockpileManager.singleton.GetClosestStockpile(haulJob.sourceBuilding.entrance.position, (haulJob.sourceBuilding as Stockpile));
+                                        stockpile = StockpileManager.singleton.GetClosestStockpile(haulJob.sourceBuilding.entrance.position, (haulJob.sourceBuilding as Stockpile));
 
-                                    if (productionBuilding == haulJob.stockpileB)
+                                    if (stockpile == haulJob.stockpileB)
                                     {
                                         pawn.jobs.Add(similarHaulJob);
                                         similarHaulJob.assignedPawn = pawn;
-                                        similarHaulJob.stockpileB = productionBuilding;
+                                        similarHaulJob.stockpileB = stockpile;
                                     }
                                 }
                             }
