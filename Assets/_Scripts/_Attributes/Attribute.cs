@@ -1,10 +1,10 @@
 public class Attribute
 {
     public string name;
-    short _baseValue;
+    int _baseValue;
 
-    public short value { get { return _baseValue; } }
-    public short baseValue { get { return _baseValue; } set { _baseValue = value; } }
+    public virtual int value { get { return _baseValue; } }
+    public virtual int baseValue { get { return _baseValue; } set { _baseValue = value; } }
 
     public Attribute()
     {
@@ -12,7 +12,7 @@ public class Attribute
         _baseValue = 0;
     }
 
-    public Attribute(string name, short value)
+    public Attribute(string name, int value)
     {
         this.name = name;
         this._baseValue = value;
